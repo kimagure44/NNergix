@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar
       app
-      color="#41E0B2"
+      color="primary"
       dark
     >
       <div class="d-flex align-center">
@@ -40,22 +40,3 @@ export default {
   }),
 };
 </script>
-
-<style lang="scss">
-  $primary-color: #41E0B2;
-  $black: #000000;
-  .bg {
-    &-color {
-      &-primary {
-        background-color: $primary-color;
-      }
-    }
-  }
-  .text {
-    &-color {
-      &-black {
-        color: $black;
-      }
-    }
-  }
-</style>
