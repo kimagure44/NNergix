@@ -8,10 +8,6 @@ import monthlyTable3 from './monthly_table_3.json';
 
 export default {
   dataFrontend,
-  lineChart1,
-  lineChart2,
-  lineChart3,
-  monthlyTable1,
-  monthlyTable2,
-  monthlyTable3,
+  charts: [lineChart1, lineChart2, lineChart3],
+  months: [monthlyTable1, monthlyTable2, monthlyTable3],
 };

@@ -40,3 +40,9 @@ export default {
   }),
 };
 </script>
+
+<style lang="scss">
+:root {
+  --primary-color: #41E0B2;
+}
+</style>
