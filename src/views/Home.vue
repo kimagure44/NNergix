@@ -1,14 +1,5 @@
 <template>
   <div>
-    <v-snackbar
-      v-model="showAlert"
-      absolute
-      top
-      left
-      color="info"
-    >
-      {{ msnAlert }}
-    </v-snackbar>
     <v-card class="ma-4">
       <v-toolbar
         flat
@@ -46,6 +37,16 @@
         </template>
       </nx-tabs>
     </v-card>
+    <v-snackbar
+      v-model="showAlert"
+      absolute
+      top
+      left
+      color="info"
+    >
+      {{ msnAlert }}
+    </v-snackbar>
+    <nx-modal :show.sync="showModal" @input="showModal = false" @new-data="newData"></nx-modal>
   </div>
 </template>
 
@@ -54,6 +55,7 @@ import dataInfo from '../data';
 import nxTabs from '../components/shared/nxTabs.vue';
 import nxTable from '../components/shared/nxTable.vue';
 import nxPlotly from '../components/shared/nxPlotly.vue';
+import nxModal from '../components/shared/nxModal.vue';
 
 export default {
   name: 'Home',
@@ -63,6 +65,7 @@ export default {
     originalData: {},
     showAlert: false,
     msnAlert: '',
+    showModal: false,
   }),
   methods: {
     setTabId(id) {
@@ -83,8 +86,17 @@ export default {
       }
     },
     addData() {
+      this.showModal = true;
+    },
+    newData(payload) {
       if (!this.showAlert) {
+        const { x, y } = payload;
+        this.showModal = false;
         this.show('Data added success');
+        console.log(payload);
+        debugger;
+        this.dataInfo.charts[this.tabId].data[0].x.push(x);
+        this.dataInfo.charts[this.tabId].data[0].y.push(y);
       }
     },
   },
@@ -96,6 +108,7 @@ export default {
     nxTabs,
     nxTable,
     nxPlotly,
+    nxModal,
   },
 };
 </script>
