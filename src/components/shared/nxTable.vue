@@ -1,7 +1,7 @@
 <template>
   <v-data-table
-    :headers="headers[tabId]"
-    :items="items[tabId]"
+    :headers="headers"
+    :items="items"
     :items-per-page="5"
     class="elevation-1"
     dense
@@ -13,14 +13,9 @@ export default {
   name: 'nx-table',
   props: {
     data: {
-      type: Array,
+      type: Object,
       required: true,
-      default: () => [],
-    },
-    tabId: {
-      type: Number,
-      required: true,
-      default: 0,
+      default: () => {},
     },
   },
   data: () => ({
@@ -32,8 +27,8 @@ export default {
       deep: true,
       immediate: true,
       handler(value) {
-        this.headers = value.map(({ schema }) => schema.fields.map((item) => ({ text: item.name, value: item.name, class: 'custom-th' })));
-        this.items = value.map(({ data }) => data.map((item) => ({ ...item })));
+        this.headers = value.schema.fields.map((item) => ({ text: item.name, value: item.name, class: 'custom-th' }));
+        this.items = value.data.map((item) => ({ ...item }));
       },
     },
   },

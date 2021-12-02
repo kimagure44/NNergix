@@ -34,7 +34,6 @@ import logo from '@/assets/logo.webp';
 
 export default {
   name: 'App',
-
   data: () => ({
     logo,
   }),

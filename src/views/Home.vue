@@ -9,7 +9,8 @@
     </v-toolbar>
     <nx-tabs :data="dataInfo.dataFrontend" @clicked="setTabId">
       <template v-slot:extra>
-        <nx-table :data="dataInfo.months" :tab-id="tabId"></nx-table>
+        <nx-table :data="dataInfo.months[tabId]" />
+        <nx-plotly :data="dataInfo.charts[tabId]" />
       </template>
     </nx-tabs>
   </v-card>
@@ -19,6 +20,7 @@
 import dataInfo from '../data';
 import nxTabs from '../components/shared/nxTabs.vue';
 import nxTable from '../components/shared/nxTable.vue';
+import nxPlotly from '../components/shared/nxPlotly.vue';
 
 export default {
   name: 'Home',
@@ -26,17 +28,18 @@ export default {
     dataInfo,
     tabId: 0,
   }),
-  created() {
-    console.log(this.dataInfo);
-  },
   methods: {
     setTabId(id) {
       this.tabId = id;
     },
   },
+  created() {
+    console.log(this.dataInfo);
+  },
   components: {
     nxTabs,
     nxTable,
+    nxPlotly,
   },
 };
 </script>
