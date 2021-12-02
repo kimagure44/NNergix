@@ -1,19 +1,51 @@
 <template>
-  <v-card class="ma-4">
-    <v-toolbar
-      flat
-      color="primary"
-      dark
+  <div>
+    <v-snackbar
+      v-model="showAlert"
+      absolute
+      top
+      left
+      color="info"
     >
-      <v-toolbar-title class="grey--text text--darken-1">Currently data</v-toolbar-title>
-    </v-toolbar>
-    <nx-tabs :data="dataInfo.dataFrontend" @clicked="setTabId">
-      <template v-slot:extra>
-        <nx-table :data="dataInfo.months[tabId]" />
-        <nx-plotly :data="dataInfo.charts[tabId]" />
-      </template>
-    </nx-tabs>
-  </v-card>
+      {{ msnAlert }}
+    </v-snackbar>
+    <v-card class="ma-4">
+      <v-toolbar
+        flat
+        color="primary"
+        dark
+      >
+        <v-row justify="space-around">
+          <v-col class="grey--text text--darken-1">
+            Currently data
+          </v-col>
+          <v-col>
+            <v-row justify="end">
+              <v-btn
+                color="blue-grey"
+                class="ma-2 white--text"
+              >
+                Add
+              </v-btn>
+              <v-btn
+                color="blue-grey"
+                class="ma-2 white--text"
+                @click="resetData"
+              >
+                Reset
+              </v-btn>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-toolbar>
+      <nx-tabs :data="dataInfo.dataFrontend" @clicked="setTabId">
+        <template v-slot:extra>
+          <nx-table :data="dataInfo.months[tabId]" />
+          <nx-plotly :data="dataInfo.charts[tabId]" />
+        </template>
+      </nx-tabs>
+    </v-card>
+  </div>
 </template>
 
 <script>
@@ -27,13 +59,26 @@ export default {
   data: () => ({
     dataInfo,
     tabId: 0,
+    originalData: {},
+    showAlert: false,
+    msnAlert: '',
   }),
   methods: {
     setTabId(id) {
       this.tabId = id;
     },
+    resetData() {
+      this.msnAlert = 'Data reset success';
+      this.showAlert = true;
+      this.dataInfo = { ...this.originalData };
+      setTimeout(() => {
+        this.showAlert = false;
+        this.msnAlert = '';
+      }, 2000);
+    },
   },
   created() {
+    this.originalData = JSON.parse(JSON.stringify(this.dataInfo));
     console.log(this.dataInfo);
   },
   components: {

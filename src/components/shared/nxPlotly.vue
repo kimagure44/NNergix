@@ -3,22 +3,6 @@
     <v-card-title class="primary">
       <v-row justify="space-around">
         <v-col>{{ iData.title }}</v-col>
-        <v-col>
-          <v-row justify="end">
-            <v-btn
-              color="blue-grey"
-              class="ma-2 white--text"
-            >
-              Add
-            </v-btn>
-            <v-btn
-              color="blue-grey"
-              class="ma-2 white--text"
-            >
-              Reset
-            </v-btn>
-          </v-row>
-        </v-col>
       </v-row>
     </v-card-title>
     <v-card-text>
@@ -51,7 +35,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.randomId);
     this.$Plotly.newPlot(this.randomId, this.iData.data, this.iData.layout);
   },
 };
