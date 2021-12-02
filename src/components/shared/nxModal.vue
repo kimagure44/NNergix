@@ -10,13 +10,13 @@
           Add new data
         </v-card-title>
         <v-card-text>
-          <v-text-field :rules="rules" type="number" placeholder="X" v-model="x"></v-text-field>
-          <v-text-field :rules="rules" type="number" placeholder="Y" v-model="y"></v-text-field>
+          <v-text-field type="number" placeholder="X" v-model="x" messages="Coord. X"></v-text-field>
+          <v-text-field type="number" placeholder="Y" v-model="y" messages="Coord. Y"></v-text-field>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            color="green darken-1"
+            color="red darken-1"
             text
             @click="action(false)"
           >
@@ -45,17 +45,16 @@ export default {
     },
   },
   data: () => ({
-    rules: [
-      (value) => !!value || 'Required.',
-    ],
     x: 0,
     y: 0,
     showModal: false,
   }),
   watch: {
     show: {
-      handler(newVal) {
-        this.showModal = newVal;
+      handler(value) {
+        this.showModal = value;
+        this.x = 0;
+        this.y = 0;
       },
     },
   },

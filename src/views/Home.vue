@@ -82,7 +82,7 @@ export default {
     resetData() {
       if (!this.showAlert) {
         this.show('Data reset success');
-        this.dataInfo = { ...this.originalData };
+        this.dataInfo = JSON.parse(JSON.stringify(this.originalData));
       }
     },
     addData() {
@@ -93,16 +93,14 @@ export default {
         const { x, y } = payload;
         this.showModal = false;
         this.show('Data added success');
-        console.log(payload);
-        debugger;
-        this.dataInfo.charts[this.tabId].data[0].x.push(x);
-        this.dataInfo.charts[this.tabId].data[0].y.push(y);
+        this.dataInfo.charts[this.tabId].data[0].x.push(parseFloat(x));
+        this.dataInfo.charts[this.tabId].data[0].y.push(parseFloat(y));
+        this.dataInfo = JSON.parse(JSON.stringify(this.dataInfo));
       }
     },
   },
   created() {
     this.originalData = JSON.parse(JSON.stringify(this.dataInfo));
-    console.log(this.dataInfo);
   },
   components: {
     nxTabs,

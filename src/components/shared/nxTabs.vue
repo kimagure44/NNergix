@@ -5,7 +5,7 @@
         v-for="({ name }, index) in data"
         :key="`tab-${index}`"
         v-text="name"
-        @click.native="onClickTab(index)"
+        @click="onClickTab(index)"
       />
       <v-tab-item v-for="(item, iItem) in data" :key="`tabContent-${iItem}`">
         <v-card flat>

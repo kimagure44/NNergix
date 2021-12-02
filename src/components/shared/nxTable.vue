@@ -22,15 +22,14 @@ export default {
     headers: [{}],
     items: [{}],
   }),
-  watch: {
-    data: {
-      deep: true,
-      immediate: true,
-      handler(value) {
-        this.headers = value.schema.fields.map((item) => ({ text: item.name, value: item.name, class: 'custom-th' }));
-        this.items = value.data.map((item) => ({ ...item }));
-      },
+  methods: {
+    updateData() {
+      this.headers = this.data.schema.fields.map((item) => ({ text: item.name, value: item.name, class: 'custom-th' }));
+      this.items = this.data.data.map((item) => ({ ...item }));
     },
+  },
+  created() {
+    this.updateData();
   },
 };
 </script>
