@@ -24,6 +24,7 @@
               <v-btn
                 color="blue-grey"
                 class="ma-2 white--text"
+                @click="addData"
               >
                 Add
               </v-btn>
@@ -67,14 +68,24 @@ export default {
     setTabId(id) {
       this.tabId = id;
     },
-    resetData() {
-      this.msnAlert = 'Data reset success';
+    show(msn) {
+      this.msnAlert = msn;
       this.showAlert = true;
-      this.dataInfo = { ...this.originalData };
       setTimeout(() => {
         this.showAlert = false;
         this.msnAlert = '';
       }, 2000);
+    },
+    resetData() {
+      if (!this.showAlert) {
+        this.show('Data reset success');
+        this.dataInfo = { ...this.originalData };
+      }
+    },
+    addData() {
+      if (!this.showAlert) {
+        this.show('Data added success');
+      }
     },
   },
   created() {
